@@ -1,0 +1,2 @@
+-include common/xprintf/Makefile.mk
+-include common/ring_buffer/Makefile.mk

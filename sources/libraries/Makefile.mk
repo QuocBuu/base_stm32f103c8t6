@@ -1,0 +1,1 @@
+-include libraries/stm32f1xx/Makefile.mk
