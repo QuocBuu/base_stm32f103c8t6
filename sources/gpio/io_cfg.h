@@ -18,7 +18,7 @@ extern "C"
 ******************************************************************************/
 #define LED_IO_PIN					(GPIO_Pin_2)
 #define LED_IO_PORT					(GPIOB)
-#define LED_IO_CLOCK				(RCC_AHBPeriph_GPIOB)
+#define LED_IO_CLOCK				(RCC_APB2Periph_GPIOB)
 
 /******************************************************************************
 * led status function

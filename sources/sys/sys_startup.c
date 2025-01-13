@@ -4,7 +4,7 @@
 // #include "task.h"
 // #include "message.h"
 
-#include "system_stm32f1xx.h"
+#include "system_stm32f10x.h"
 // #include "sys_irq.h"
 // #include "sys_cfg.h"
 
