@@ -9,7 +9,7 @@
 void led_init() {
 	GPIO_InitTypeDef        GPIO_InitStructure;
 
-	RCC_AHBPeriphClockCmd(LED_IO_CLOCK, ENABLE);
+	RCC_APB2PeriphClockCmd(LED_IO_CLOCK, ENABLE);
 
 	GPIO_InitStructure.GPIO_Pin = LED_IO_PIN;
 	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_Out_PP;

@@ -5,8 +5,8 @@ Print = @echo "~"
 NAME_MODULE = stm32f103-base
 PROJECT = $(NAME_MODULE)
 
-GCC_PATH			= /opt/gcc-arm-none-eabi-10.3-2021.10
-PROGRAMER_PATH		= $(HOME)/MCU/tools/STM32Programer/bin
+GCC_PATH			= $(HOME)/Workspace/Tools/gcc-arm-none-eabi-10.3-2021.10
+PROGRAMER_PATH		= $(HOME)/Workspace/Tools/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin
 OPENOCD_CFG_PATH	= /usr/local/share/openocd/scripts/board/stm32ldiscovery.cfg
 
 # App start address, that need sync with declare in linker file and interrupt vector table.
