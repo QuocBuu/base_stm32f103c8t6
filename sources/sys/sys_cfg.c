@@ -9,7 +9,7 @@
 #include "stm32f10x_i2c.h"
 #include "stm32f10x_tim.h"
 #include "stm32f10x_exti.h"
-#include "stm32f10x_syscfg.h"
+#include "sys_cfg.h"
 
 // #include "sys_irq.h"
 #include "sys_platform.h"
@@ -76,10 +76,8 @@ void sys_cfg_console() {
 	GPIO_PinAFConfig(USARTx_RX_GPIO_PORT, USARTx_RX_SOURCE, USARTx_RX_AF);
 
 	/* Configure USART Tx and Rx as alternate function push-pull */
-	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
+	GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF_PP;
 	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_2MHz;
-	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-	GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;
 	GPIO_InitStructure.GPIO_Pin = USARTx_TX_PIN;
 	GPIO_Init(USARTx_TX_GPIO_PORT, &GPIO_InitStructure);
 

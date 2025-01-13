@@ -5,8 +5,8 @@ Print = @echo "~"
 NAME_MODULE = stm32f103-base
 PROJECT = $(NAME_MODULE)
 
-GCC_PATH			= $(HOME)/Workspace/Tools/gcc-arm-none-eabi-10.3-2021.10
-PROGRAMER_PATH		= $(HOME)/Workspace/Tools/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin
+GCC_PATH			= /opt/gcc-arm-none-eabi-10.3-2021.10
+PROGRAMER_PATH		= $(HOME)/MCU/tools/STM32Programer/bin
 OPENOCD_CFG_PATH	= /usr/local/share/openocd/scripts/board/stm32ldiscovery.cfg
 
 # App start address, that need sync with declare in linker file and interrupt vector table.
@@ -19,7 +19,6 @@ CONSOLE_BAUDRATE_DEF = -DSYS_CONSOLE_BAUDRATE=$(SYS_CONSOLE_BAUDRATE)
 
 # Include sources file
 -include app/Makefile.mk
--include libraries/stm32f1xx/STM32F10x_StdPeriph_Driver/Makefile.mk
 -include libraries/Makefile.mk
 -include sys/Makefile.mk
 -include common/Makefile.mk
@@ -112,7 +111,7 @@ GENERAL_FLAGS +=			\
 		$(OPTIMIZE_OPTION)	\
 		-DUSE_STDPERIPH_DRIVER	\
 		-DSTM32F10X_MD		\
-		-DSTM32F1 \
+		$(CONSOLE_BAUDRATE_DEF)
 
 COMPILER_FLAGS +=			\
 		$(CPU)			\
@@ -150,7 +149,6 @@ all: create $(TARGET)
 create:
 	$(Print) CREATE $(OBJECTS_DIR) folder
 	@mkdir -p $(OBJECTS_DIR)
-# @echo $(OBJECTS)
 
 $(TARGET): $(OBJECTS) $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(LIBFPU) $(LIBRDPMON)
 	$(Print) LD $@
@@ -163,17 +161,14 @@ $(TARGET): $(OBJECTS) $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(L
 
 $(OBJECTS_DIR)/%.o: %.c
 	$(Print) CC $@
-# @echo $(CC) $(CFLAGS) -o $@ $<
 	@$(CC) $(CFLAGS) -o $@ $<
 
 $(OBJECTS_DIR)/%.o: %.cpp
 	$(Print) CXX $@
-# @echo $(CPP) $(CPPFLAGS) -o $@ $<
 	@$(CPP) $(CPPFLAGS) -o $@ $<
 
 $(OBJECTS_DIR)/%.o: %.s
 	$(Print) AS $@
-# @echo $(AS) $(CFLAGS) -o $@ $<
 	@$(AS) $(CFLAGS) -o $@ $<
 
 .PHONY: flash
