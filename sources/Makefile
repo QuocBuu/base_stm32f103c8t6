@@ -19,7 +19,7 @@ CONSOLE_BAUDRATE_DEF = -DSYS_CONSOLE_BAUDRATE=$(SYS_CONSOLE_BAUDRATE)
 
 # Include sources file
 -include app/Makefile.mk
-# -include libraries/stm32f1xx/STM32F10x_StdPeriph_Driver/Makefile.mk
+-include libraries/stm32f1xx/STM32F10x_StdPeriph_Driver/Makefile.mk
 -include libraries/Makefile.mk
 -include sys/Makefile.mk
 -include common/Makefile.mk
@@ -93,7 +93,7 @@ ARM_SIZE	=	$(GCC_PATH)/bin/arm-none-eabi-size
 
 # Set the compiler CPU/FPU options.
 # https://launchpadlibrarian.net/177524521/readme.txt
-# CPU = -mcpu=cortex-m3 -mthumb
+CPU = -mcpu=cortex-m3 -mthumb
 FPU = 
 
 # Interface option
@@ -108,11 +108,11 @@ CONSOLE_OPTION +=			\
 		-DAPP_DBG_EN		\
 		-DAPP_DBG_SIG_EN	\
 
-GENERAL_FLAGS += -Wall -Werror -O2 -nostdlib -nostartfiles -ffreestanding  -mcpu=cortex-m0 \
+GENERAL_FLAGS +=			\
+		$(OPTIMIZE_OPTION)	\
 		-DUSE_STDPERIPH_DRIVER	\
 		-DSTM32F10X_MD		\
 		-DSTM32F1 \
-		
 
 COMPILER_FLAGS +=			\
 		$(CPU)			\
@@ -146,10 +146,11 @@ LDFLAGS	=	-Map=$(OBJECTS_DIR)/$(PROJECT).map	\
 		$(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(LIBFPU) $(LIBRDPMON)
 
 all: create $(TARGET)
-
+	
 create:
 	$(Print) CREATE $(OBJECTS_DIR) folder
 	@mkdir -p $(OBJECTS_DIR)
+# @echo $(OBJECTS)
 
 $(TARGET): $(OBJECTS) $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(LIBFPU) $(LIBRDPMON)
 	$(Print) LD $@
@@ -162,14 +163,17 @@ $(TARGET): $(OBJECTS) $(LIBC) $(LIBM) $(LIBSTDCPP_NANO) $(LIBGCC) $(LIBGCOV) $(L
 
 $(OBJECTS_DIR)/%.o: %.c
 	$(Print) CC $@
+# @echo $(CC) $(CFLAGS) -o $@ $<
 	@$(CC) $(CFLAGS) -o $@ $<
 
 $(OBJECTS_DIR)/%.o: %.cpp
 	$(Print) CXX $@
+# @echo $(CPP) $(CPPFLAGS) -o $@ $<
 	@$(CPP) $(CPPFLAGS) -o $@ $<
 
 $(OBJECTS_DIR)/%.o: %.s
 	$(Print) AS $@
+# @echo $(AS) $(CFLAGS) -o $@ $<
 	@$(AS) $(CFLAGS) -o $@ $<
 
 .PHONY: flash

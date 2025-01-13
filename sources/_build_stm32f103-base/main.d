@@ -22,7 +22,8 @@ _build_stm32f103-base/main.o: app/main.c \
  /home/buu/Workspace/Tools/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/stdio.h \
  gpio/io_cfg.h \
  /home/buu/Workspace/Tools/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stdint.h \
- /home/buu/Workspace/Tools/gcc-arm-none-eabi-10.3-2021.10/lib/gcc/arm-none-eabi/10.3.1/include/stdint-gcc.h \
+ /home/buu/Workspace/Tools/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/stdint.h \
+ /home/buu/Workspace/Tools/gcc-arm-none-eabi-10.3-2021.10/arm-none-eabi/include/sys/_intsup.h \
  libraries/stm32f1xx/CMSIS/CM3/DeviceSupport/ST/STM32F10x/stm32f10x_conf.h \
  libraries/stm32f1xx/STM32F10x_StdPeriph_Driver/inc/stm32f10x_adc.h \
  libraries/stm32f1xx/CMSIS/CM3/DeviceSupport/ST/STM32F10x/stm32f10x.h \
